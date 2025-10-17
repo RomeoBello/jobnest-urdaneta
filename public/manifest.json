@@ -1,0 +1,12 @@
+{
+  "name": "JobNest Urdaneta City",
+  "short_name": "JobNest",
+  "description": "Find jobs and hire locally in Urdaneta City, Pangasinan.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0A2D4A",
+  "icons": [
+    { "src": "/logo-jobnest-urdaneta.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}

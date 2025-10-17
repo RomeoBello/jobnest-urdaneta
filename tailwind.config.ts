@@ -1,0 +1,1 @@
+export default { content: ['./app/**/*.{ts,tsx}','./components/**/*.{ts,tsx}'], theme: { extend: { colors:{ brandNavy:'#0A2D4A', brandGold:'#D9A441', brandOutline:'#15324B' } } }, plugins: [] } as import('tailwindcss').Config;

@@ -1,0 +1,48 @@
+PRIVACY POLICY
+Last updated: JobNest Urdaneta City
+
+1) Scope
+This Privacy Policy explains how JobNest Urdaneta City collects, uses, and protects personal data of users (employers and job seekers) within Urdaneta City.
+
+2) Legal Basis
+We comply with the Philippine Data Privacy Act of 2012 (Republic Act No. 10173) and its Implementing Rules and Regulations.
+
+3) Data We Collect
+• Account data: name, email, password (hashed by our auth provider). 
+• Profile and job data: company name, job titles, descriptions, pay ranges, city.
+• Application data: resume/CV, messages, contact details.
+• Usage data: pages visited, device info, approximate location (via IP), cookies for session/auth.
+
+4) How We Use Data
+• Provide and secure the Service (authentication, postings, applications).
+• Communicate with you (account notices, application updates).
+• Prevent abuse and enforce policies.
+• Improve the Service (analytics).
+
+5) Sharing
+• With your direction: when you apply to a job, your application is shared with that employer.
+• Service providers: hosting, email, analytics, and payment processors (if any), under confidentiality terms.
+• Legal: when required by law or to protect rights and safety.
+
+6) Data Retention
+We keep data as needed to provide the Service and as required by law. You may request deletion, subject to lawful exceptions.
+
+7) Security
+We use reasonable technical and organizational measures. No method of transmission or storage is 100% secure.
+
+8) Your Rights
+Subject to law, you may request access, correction, or deletion of your personal data by contacting us at support@jobnest.mysdproject2025.com.
+
+9) Children
+The Service is not intended for children under 18. We do not knowingly collect data from minors.
+
+10) International Access
+While the platform focuses on Urdaneta City, our infrastructure may be hosted internationally. Transfers are safeguarded by contracts with providers.
+
+11) Changes
+We may update this Policy. Material changes will be posted with an updated date.
+
+12) Contact
+JobNest Urdaneta City
+Urdaneta City, Pangasinan, Philippines
+Email: support@jobnest.mysdproject2025.com

@@ -1,0 +1,1 @@
+export default function Policy(){return (<div className='max-w-3xl mx-auto px-4 py-12 text-sm'><h1 className='text-2xl font-extrabold text-brandNavy'>Government & GOCC Policy</h1><p className='mt-2'>Government offices are free. GOCC follows regular plan.</p></div>)}

@@ -1,0 +1,48 @@
+PATAKARAN SA PRIBADONG IMPORMASYON (PRIVACY POLICY)
+Huling na-update: JobNest Urdaneta City
+
+1) Saklaw
+Ipinapaliwanag ng Patakarang ito kung paano kinokolekta, ginagamit, at pinangangalagaan ng JobNest Urdaneta City ang personal na datos ng mga gumagamit (employer at naghahanap ng trabaho) sa Lungsod ng Urdaneta.
+
+2) Batayang Legal
+Tinutupad namin ang Data Privacy Act of 2012 (Republic Act No. 10173) at ang mga IRR nito.
+
+3) Datos na Kinokolekta
+• Datos ng account: pangalan, email, password (hashed sa aming auth provider).
+• Profile at datos ng trabaho: pangalan ng kumpanya, pamagat at deskripsyon ng trabaho, saklaw ng sahod, lungsod.
+• Datos ng aplikasyon: resume/CV, mga mensahe, detalye ng contact.
+• Usage data: mga page na binisita, impormasyon ng device, approximate na lokasyon (via IP), cookies para sa session/auth.
+
+4) Paano Ginagamit ang Datos
+• Para maibigay at mapangalagaan ang Serbisyo (auth, postings, applications).
+• Para makipag-ugnayan (mga abiso sa account, update sa aplikasyon).
+• Para pigilan ang abuso at ipatupad ang mga patakaran.
+• Para pagandahin ang Serbisyo (analytics).
+
+5) Pagbabahagi
+• Sa iyong direksyon: kapag nag-apply ka, ibinabahagi ang iyong aplikasyon sa employer na iyon.
+• Mga service provider: hosting, email, analytics, at payment processors (kung mayroon), sa ilalim ng NDA/confidentiality.
+• Legal: kapag iniaatas ng batas o para protektahan ang karapatan at kaligtasan.
+
+6) Pagpapanatili ng Datos
+Pinananatili ang datos hangga’t kailangan para sa Serbisyo at ayon sa batas. Maaari kang humiling ng pagbura maliban kung ipinagbabawal ng batas.
+
+7) Seguridad
+Gumagamit kami ng makatwirang teknikal at organisasyonal na hakbang. Walang pamamaraang 100% ligtas.
+
+8) Iyong mga Karapatan
+Maaari kang humiling ng access, pagwawasto, o pagbura ng iyong personal na datos sa pamamagitan ng pag-email sa support@jobnest.mysdproject2025.com, alinsunod sa batas.
+
+9) Mga Bata
+Hindi para sa mga menor de edad (wala pang 18) ang Serbisyo. Hindi kami sadya na nangongolekta ng datos mula sa mga bata.
+
+10) International Access
+Bagama’t nakatuon sa Lungsod ng Urdaneta, maaaring nasa ibang bansa ang ilang imprastraktura. Pinangangalagaan ang transfers sa pamamagitan ng mga kontrata sa providers.
+
+11) Mga Pagbabago
+Maaaring i-update ang Patakarang ito. Ipo-post ang mahahalagang pagbabago kasama ang petsa ng pag-update.
+
+12) Contact
+JobNest Urdaneta City
+Urdaneta City, Pangasinan, Philippines
+Email: support@jobnest.mysdproject2025.com

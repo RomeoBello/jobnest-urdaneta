@@ -1,0 +1,1 @@
+export default function FAQ(){return (<div className='max-w-3xl mx-auto px-4 py-12 text-sm'><h1 className='text-2xl font-extrabold text-brandNavy'>FAQ</h1></div>)}
