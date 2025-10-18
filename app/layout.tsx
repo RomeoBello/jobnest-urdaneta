@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Logo from '@/components/Logo'
 import NavLink from '@/components/NavLink'
-<Link href="/terms" className="underline">Terms</Link>
+<Link href="/policy" className="underline">Privacy Policy</Link>
 
 
 const siteName = 'JobNest Urdaneta City'
