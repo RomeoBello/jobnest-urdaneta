@@ -1,12 +1,11 @@
-import fs from 'fs/promises';
-import path from 'path';
-
 export const runtime = 'nodejs';
 export const revalidate = 60 * 60;
 
+import fs from 'fs/promises';
+import path from 'path';
+
 async function read(rel: string) {
-  const full = path.join(process.cwd(), rel);
-  return fs.readFile(full, 'utf8');
+  return fs.readFile(path.join(process.cwd(), rel), 'utf8');
 }
 
 export default async function DisclaimerPage() {

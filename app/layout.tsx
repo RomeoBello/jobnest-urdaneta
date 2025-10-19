@@ -3,8 +3,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Logo from '@/components/Logo'
 import NavLink from '@/components/NavLink'
-<Link href="/policy" className="underline">Privacy Policy</Link>
-<Link href="/privacy" className="underline">Privacy Policy</Link>
+<Link href="/privacy" className="underline">Privacy</Link>
 <Link href="/terms" className="underline">Terms</Link>
 <Link href="/disclaimer" className="underline">Disclaimer</Link>
 
