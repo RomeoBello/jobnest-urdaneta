@@ -89,3 +89,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
+
+{/* Footer links */}
+<div className="flex gap-6">
+  <Link href="/pricing" className="underline">Pricing</Link>
+  <Link href="/faq" className="underline">FAQ</Link>
+  <Link href="/terms" className="underline">Terms</Link>
+  <Link href="/privacy" className="underline">Privacy Policy</Link> {/* optional if you add /privacy */}
+  <Link href="/contact" className="underline">Contact Us</Link>
+</div>
