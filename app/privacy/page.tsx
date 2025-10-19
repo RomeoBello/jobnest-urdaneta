@@ -114,3 +114,41 @@ Email: support@jobnest.mysdproject2025.com</pre>
     </main>
   )
 }
+
+
+export const runtime = 'nodejs';
+export const revalidate = 60 * 60;
+
+import fs from 'fs/promises';
+import path from 'path';
+import type { Metadata } from 'next';
+import PolicyTabs from '../policy/PolicyTabs';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy · JobNest Urdaneta City',
+  description: 'Read JobNest Urdaneta City’s Privacy Policy in English and Filipino.',
+};
+
+async function read(rel: string) {
+  return fs.readFile(path.join(process.cwd(), rel), 'utf8');
+}
+
+async function getPolicies() {
+  const en =
+    (await read('legal/Privacy_Policy_EN1.txt').catch(() => null)) ??
+    (await read('legal/Privacy_Policy_EN.txt').catch(() => null)) ?? '';
+  const tl =
+    (await read('legal/Privacy_Policy_FI1.txt').catch(() => null)) ??
+    (await read('legal/Privacy_Policy_FIL.txt').catch(() => null)) ?? '';
+  return { en, tl };
+}
+
+export default async function PrivacyPage() {
+  const { en, tl } = await getPolicies();
+  return (
+    <main className="mx-auto max-w-3xl px-4 py-10">
+      <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
+      <PolicyTabs en={en} tl={tl} />
+    </main>
+  );
+}
