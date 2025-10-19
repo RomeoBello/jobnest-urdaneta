@@ -3,14 +3,10 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import Logo from '@/components/Logo'
 import NavLink from '@/components/NavLink'
-<Link href="/privacy" className="underline">Privacy</Link>
-<Link href="/terms" className="underline">Terms</Link>
-<Link href="/disclaimer" className="underline">Disclaimer</Link>
-
 
 const siteName = 'JobNest Urdaneta City'
 const siteDesc = 'Connecting employers and job seekers locally in Urdaneta City, Pangasinan.'
-const siteUrl = 'https://jobnest.mysdproject2025.com' // update when deployed
+const siteUrl = 'https://jobnest.mysdproject2025.com'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -20,8 +16,12 @@ export const metadata: Metadata = {
   },
   description: siteDesc,
   keywords: [
-    'Urdaneta City jobs', 'Pangasinan jobs', 'local hiring',
-    'JobNest Urdaneta City', 'Urdaneta employers', 'Urdaneta careers'
+    'Urdaneta City jobs',
+    'Pangasinan jobs',
+    'local hiring',
+    'JobNest Urdaneta City',
+    'Urdaneta employers',
+    'Urdaneta careers'
   ],
   openGraph: {
     title: siteName,
@@ -68,9 +68,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </div>
         </header>
+
         <main>{children}</main>
+
         <footer className="py-10 bg-white border-t mt-16">
-          <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-6 items-center">
+          <div className="max-w-6xl mx-auto px-4 md:grid-cols-3 gap-6 items-center grid">
             <div className="flex items-center gap-3">
               <Logo className="w-10 h-10" />
               <div>
@@ -78,12 +80,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div className="text-xs text-slate-500">Connecting Urdaneta to opportunities</div>
               </div>
             </div>
-            <div className="text-sm text-slate-600">© {new Date().getFullYear()} JobNest Urdaneta City. All rights reserved.</div>
-            <div className="flex justify-start md:justify-end gap-4 text-sm">
-              <Link href="/pricing" className="underline">Pricing</Link>
-              <Link href="/faq" className="underline">FAQ</Link>
-              <Link href="/policy" className="underline">Policy</Link>
-              <Link href="/contact" className="underline">Contact Us</Link>
+            <div className="text-sm text-slate-600 col-span-2 md:text-right mt-4 md:mt-0">
+              <div className="flex flex-wrap justify-center md:justify-end gap-4 text-sm">
+                <Link href="/pricing" className="underline">Pricing</Link>
+                <Link href="/faq" className="underline">FAQ</Link>
+                <Link href="/privacy" className="underline">Privacy</Link>
+                <Link href="/terms" className="underline">Terms</Link>
+                <Link href="/disclaimer" className="underline">Disclaimer</Link>
+                <Link href="/contact" className="underline">Contact Us</Link>
+              </div>
+              <div className="text-xs text-slate-500 mt-4">© {new Date().getFullYear()} JobNest Urdaneta City. All rights reserved.</div>
             </div>
           </div>
         </footer>
@@ -91,12 +97,3 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   )
 }
-
-{/* Footer links */}
-<div className="flex gap-6">
-  <Link href="/pricing" className="underline">Pricing</Link>
-  <Link href="/faq" className="underline">FAQ</Link>
-  <Link href="/terms" className="underline">Terms</Link>
-  <Link href="/privacy" className="underline">Privacy Policy</Link> {/* optional if you add /privacy */}
-  <Link href="/contact" className="underline">Contact Us</Link>
-</div>
