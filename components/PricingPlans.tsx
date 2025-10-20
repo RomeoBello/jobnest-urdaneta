@@ -1,4 +1,4 @@
-export default function Pricing() {
+export default function PricingPlans() {
   return (
     <section className="max-w-5xl mx-auto px-6 py-12">
       <h1 className="text-4xl font-extrabold text-center text-[#0A2D4A] mb-6">
@@ -10,7 +10,6 @@ export default function Pricing() {
       </p>
 
       <div className="grid md:grid-cols-2 gap-8">
-        {/* Free Trial */}
         <div className="rounded-2xl shadow-lg border border-slate-200 p-8 bg-white">
           <h2 className="text-2xl font-bold text-[#0A2D4A] mb-3">🎁 Free Trial</h2>
           <p className="text-slate-600 mb-6">
@@ -27,7 +26,6 @@ export default function Pricing() {
           </div>
         </div>
 
-        {/* Intro Standard */}
         <div className="rounded-2xl shadow-lg border border-slate-200 p-8 bg-white">
           <h2 className="text-2xl font-bold text-[#0A2D4A] mb-3">💼 Intro Standard</h2>
           <p className="text-slate-600 mb-6">
