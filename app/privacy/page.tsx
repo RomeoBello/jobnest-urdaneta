@@ -1,30 +1,31 @@
-export const runtime = 'nodejs';
-export const revalidate = 60 * 60; // revalidate hourly
-
-import fs from 'fs/promises';
+import fs from 'fs';
 import path from 'path';
+import LanguageSelect from '@/components/LanguageSelect';
 
-async function read(rel: string) {
-  return fs.readFile(path.join(process.cwd(), rel), 'utf8');
+function readLegal(name: string) {
+  const p = path.join(process.cwd(), 'legal', name);
+  return fs.readFileSync(p, 'utf8');
 }
 
-export default async function PrivacyPage() {
-  const en = await read('legal/Privacy_Policy_PH_EN.txt');
-  const fil = await read('legal/Privacy_Policy_PH_FIL.txt');
+export default function Privacy({
+  searchParams,
+}: {
+  searchParams: { lang?: string };
+}) {
+  const selected = searchParams?.lang === 'fil' ? 'fil' : 'en';
+  const en = readLegal('privacy_en.txt');
+  const fil = readLegal('privacy_fil.txt');
+  const body = selected === 'fil' ? fil : en;
 
   return (
-    <main className="max-w-4xl mx-auto py-12 px-4">
-      <h1 className="text-3xl font-bold mb-6 text-center">Privacy Policy</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <section>
-          <h2 className="font-semibold text-xl mb-2">English</h2>
-          <pre className="whitespace-pre-wrap">{en}</pre>
-        </section>
-        <section>
-          <h2 className="font-semibold text-xl mb-2">Filipino</h2>
-          <pre className="whitespace-pre-wrap">{fil}</pre>
-        </section>
-      </div>
-    </main>
+    <div className="max-w-4xl mx-auto px-4 py-10">
+      <h1 className="text-2xl md:text-3xl font-extrabold text-brandNavy">Privacy Policy</h1>
+      <LanguageSelect selected={selected as 'en' | 'fil'} />
+      <article className="prose max-w-none prose-slate">
+        {body.split('\n').map((line, i) => (
+          <p key={i}>{line}</p>
+        ))}
+      </article>
+    </div>
   );
 }
