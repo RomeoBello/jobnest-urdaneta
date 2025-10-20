@@ -50,3 +50,13 @@
     </p>
   </div>
 </section>
+import PricingPlans from '@/components/PricingPlans';
+
+export default function EmployersPage() {
+  return (
+    <>
+      {/* ...keep any hero/intro for employers here... */}
+      <PricingPlans />
+    </>
+  );
+}
