@@ -1,49 +1,55 @@
 export default function Pricing() {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
-      <div className="rounded-xl border bg-white p-4 text-sm text-slate-700">
-        <span className="inline-block px-2 py-0.5 rounded-full mr-2 text-xs border border-green-600 text-green-700">
-          Government
-        </span>
-        Government offices get the <b>Free plan</b> after simple verification (e.g., @gov.ph or official ID).
+    <div className="max-w-5xl mx-auto px-6 py-12">
+      <h1 className="text-4xl font-extrabold text-center text-[#0A2D4A] mb-6">
+        JobNest Urdaneta Pricing
+      </h1>
+      <p className="text-center text-slate-600 mb-12">
+        Start your journey with us. Enjoy your <strong>first month absolutely free!</strong>
+      </p>
+
+      <div className="grid md:grid-cols-2 gap-8">
+        {/* Free Plan */}
+        <div className="rounded-2xl shadow-lg border border-slate-200 p-8 bg-white">
+          <h2 className="text-2xl font-bold text-[#0A2D4A] mb-3">🎁 Free Trial</h2>
+          <p className="text-slate-600 mb-6">
+            Perfect for new employers. Experience JobNest Urdaneta with no commitment.
+          </p>
+          <ul className="list-disc list-inside text-slate-700 space-y-2">
+            <li>✅ 1 month free posting period</li>
+            <li>✅ Unlimited applicants during trial</li>
+            <li>✅ Local exposure to job seekers in Urdaneta City</li>
+          </ul>
+          <div className="text-center mt-6">
+            <span className="text-2xl font-bold text-[#D9A441]">₱0</span>
+            <p className="text-sm text-slate-500">for 1 month</p>
+          </div>
+        </div>
+
+        {/* Paid Plan */}
+        <div className="rounded-2xl shadow-lg border border-slate-200 p-8 bg-white">
+          <h2 className="text-2xl font-bold text-[#0A2D4A] mb-3">💼 Standard Plan</h2>
+          <p className="text-slate-600 mb-6">
+            Continue posting jobs after your trial with simple, transparent pricing.
+          </p>
+          <ul className="list-disc list-inside text-slate-700 space-y-2">
+            <li>📅 ₱50.00 per job posting per month</li>
+            <li>🖱️ ₱0.10 per click (only valid applicant views)</li>
+            <li>📊 Job analytics and performance reports</li>
+            <li>🌆 Urdaneta City–based exposure</li>
+          </ul>
+          <div className="text-center mt-6">
+            <span className="text-2xl font-bold text-[#D9423A]">₱50.00</span>
+            <p className="text-sm text-slate-500">per job/month + ₱0.10 per click</p>
+          </div>
+        </div>
       </div>
 
-      <h1 className="mt-6 text-2xl md:text-3xl font-extrabold text-brandNavy">Plans</h1>
-
-      <div className="grid md:grid-cols-3 gap-6 mt-6">
-        <div className="p-6 rounded-2xl border shadow-sm bg-white">
-          <div className="text-sm font-semibold text-brandNavy">Government Offices</div>
-          <div className="mt-2 text-3xl font-extrabold">FREE</div>
-          <ul className="mt-4 text-sm text-slate-600 space-y-2">
-            <li>Unlimited job posts</li>
-            <li>“Verified Government” badge</li>
-            <li>Placement in Government Jobs section</li>
-          </ul>
-          <a href="/post" className="mt-5 inline-block px-4 py-2 rounded-lg font-semibold bg-brandNavy text-white">Start posting</a>
-        </div>
-
-        <div className="p-6 rounded-2xl border-2 shadow-md bg-white border-brandGold">
-          <div className="text-sm font-semibold text-brandNavy">Standard (Private / GOCC)</div>
-          <div className="mt-2 text-3xl font-extrabold">₱500<span className="text-base font-semibold">/mo</span></div>
-          <ul className="mt-4 text-sm text-slate-600 space-y-2">
-            <li>Unlimited posts</li>
-            <li>Company page & branding</li>
-            <li>Basic analytics</li>
-          </ul>
-          <a href="/post" className="mt-5 inline-block px-4 py-2 rounded-lg font-semibold bg-brandGold text-brandOutline">Subscribe</a>
-        </div>
-
-        <div className="p-6 rounded-2xl border shadow-sm bg-white">
-          <div className="text-sm font-semibold text-brandNavy">Featured Add‑On</div>
-          <div className="mt-2 text-3xl font-extrabold">₱100<span className="text-base font-semibold">/day</span></div>
-          <ul className="mt-4 text-sm text-slate-600 space-y-2">
-            <li>Top of search placement</li>
-            <li>Homepage highlight</li>
-            <li>Best for urgent roles</li>
-          </ul>
-          <a href="/post" className="mt-5 inline-block px-4 py-2 rounded-lg font-semibold border border-brandNavy text-brandNavy">Feature a job</a>
-        </div>
+      <div className="text-center mt-10">
+        <p className="text-slate-600">
+          💡 Prices are introductory and may change as we expand. Existing users will be notified in advance.
+        </p>
       </div>
     </div>
-  )
+  );
 }
