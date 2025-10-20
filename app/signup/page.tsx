@@ -51,3 +51,7 @@ export default function SignUp() {
     </div>
   )
 }
+
+<p className="text-sm text-slate-500 mt-2 text-center">
+  🎉 New employers enjoy their first month free — no payment required!
+</p>

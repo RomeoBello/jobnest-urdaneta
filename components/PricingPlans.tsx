@@ -1,4 +1,4 @@
-export default function PricingPlans() {
+export default function Pricing() {
   return (
     <section className="max-w-5xl mx-auto px-6 py-12">
       <h1 className="text-4xl font-extrabold text-center text-[#0A2D4A] mb-6">
