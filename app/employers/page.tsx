@@ -1,20 +1,52 @@
-export default function Employers() {
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <h1 className="text-2xl md:text-3xl font-extrabold text-brandNavy">Employers</h1>
-      <p className="mt-2 text-slate-600">Everything you need to hire locally in Urdaneta City.</p>
+<section className="max-w-5xl mx-auto px-6 py-12">
+  <h1 className="text-4xl font-extrabold text-center text-[#0A2D4A] mb-6">
+    JobNest Urdaneta Plans
+  </h1>
+  <p className="text-center text-slate-600 mb-12">
+    Start strong — <strong>your first month is FREE!</strong> Then only ₱50 per post per month
+    plus ₱0.10 per valid click.
+  </p>
 
-      <ol className="mt-6 space-y-4 text-sm">
-        <li><b>1) Create an account</b> – Sign in on the top-right to manage your posts.</li>
-        <li><b>2) Post a job</b> – Go to <code>/post</code>, fill details, and submit. New posts start as <i>pending</i> for quick review.</li>
-        <li><b>3) Get applicants</b> – Candidates can email you directly. Add a clear description and contact email.</li>
-        <li><b>4) Featured</b> – Boost urgent roles with Featured add‑on from the Pricing page.</li>
-      </ol>
-
-      <div className="mt-8 rounded-xl border bg-white p-4 text-sm">
-        <div className="font-semibold text-brandNavy">Government offices</div>
-        <p className="mt-1">Verified government offices can use the Free plan. See details on the <a className="underline" href="/pricing">Pricing</a> page.</p>
+  <div className="grid md:grid-cols-2 gap-8">
+    {/* Free Trial */}
+    <div className="rounded-2xl shadow-lg border border-slate-200 p-8 bg-white">
+      <h2 className="text-2xl font-bold text-[#0A2D4A] mb-3">🎁 Free Trial</h2>
+      <p className="text-slate-600 mb-6">
+        Perfect for new employers in Urdaneta City. Try JobNest with no upfront cost.
+      </p>
+      <ul className="list-disc list-inside text-slate-700 space-y-2">
+        <li>✅ 1 month free posting for all new accounts</li>
+        <li>✅ Unlimited applicants during trial</li>
+        <li>✅ Local visibility to nearby job seekers</li>
+      </ul>
+      <div className="text-center mt-6">
+        <span className="text-2xl font-bold text-[#D9A441]">₱0</span>
+        <p className="text-sm text-slate-500">for your first month</p>
       </div>
     </div>
-  )
-}
+
+    {/* Intro Standard */}
+    <div className="rounded-2xl shadow-lg border border-slate-200 p-8 bg-white">
+      <h2 className="text-2xl font-bold text-[#0A2D4A] mb-3">💼 Intro Standard</h2>
+      <p className="text-slate-600 mb-6">
+        Continue posting after your trial with affordable local pricing.
+      </p>
+      <ul className="list-disc list-inside text-slate-700 space-y-2">
+        <li>📅 ₱50.00 per job posting per month</li>
+        <li>🖱️ ₱0.10 per valid click (charged only on applicant views)</li>
+        <li>📊 Basic analytics & performance tracking</li>
+      </ul>
+      <div className="text-center mt-6">
+        <span className="text-2xl font-bold text-[#D9423A]">₱50.00</span>
+        <p className="text-sm text-slate-500">per job/month + ₱0.10 per click</p>
+      </div>
+    </div>
+  </div>
+
+  <div className="text-center mt-10">
+    <p className="text-slate-600">
+      💡 These are introductory rates to help local employers get started. You’ll be notified of
+      any pricing changes in advance.
+    </p>
+  </div>
+</section>
