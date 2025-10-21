@@ -1,0 +1,1 @@
+export default function AdminPricing(){return (<div className='p-6'>Admin pricing editor placeholder</div>);}
