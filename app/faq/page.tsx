@@ -1,187 +1,93 @@
 'use client';
 
-import { useState } from 'react';
-import type { Metadata } from 'next';
+import React from 'react';
 
-export const metadata: Metadata = {
-  title: 'FAQ | JobNest Urdaneta City',
-  description:
-    'Frequently asked questions for Employers and Job Seekers using JobNest Urdaneta City.',
-};
+type QA = { q: string; a: React.ReactNode };
 
-// ---- Editable FAQ DATA -------------------------------------------------------
-type QA = { q: string; a: string };
-
-const EMPLOYER_FAQ: QA[] = [
-  {
-    q: 'How can I post a job on JobNest?',
-    a: 'Sign in to your Employer account and click “Post a Job”. Choose your plan (Government, Private/GOCC, or Featured Add-On) and complete the form.',
-  },
-  {
-    q: 'How long does a job post stay live?',
-    a: 'Each listing remains active for 30 days from approval. You may renew or feature the listing anytime.',
-  },
-  {
-    q: 'What payment methods do you support?',
-    a: 'GCash, Maya, and other local gateways. Payment is authorized when you confirm your plan.',
-  },
-  {
-    q: 'Can I boost visibility?',
-    a: 'Yes. The ₱100/day Featured Add-On places your job on top of search results and on the homepage.',
-  },
-  {
-    q: 'What’s the difference between Government, Private/GOCC, and Personal posts?',
-    a: 'Government posts are free for verified offices. Private/GOCC is ₱500/month. Personal (e.g., household help) is free to post but charges ₱0.10 per click.',
-  },
-  {
-    q: 'What if I don’t renew?',
-    a: 'Expired posts are hidden automatically. Your account and data remain intact.',
-  },
-  {
-    q: 'How do I contact support?',
-    a: 'Email support@jobnest.ph or use the Contact page. Our CS team will assist you.',
-  },
+const employerFaq: QA[] = [
+  { q: 'How do I post a job?', a: <>Go to <strong>Employers → Post a Job</strong>, complete the form, and submit for instant publishing.</> },
+  { q: 'What are the pricing/fees?', a: <>Private/GOCC companies follow the current pricing on the <a href="/pricing" className="underline">Pricing</a> page. Government posts are free after verification. Pay‑per‑click applies when configured.</> },
+  { q: 'How long does a post stay live?', a: <>Standard posts run for <strong>30 days</strong> by default. You can extend or feature them anytime.</> },
+  { q: 'Can I edit or pause a listing?', a: <>Yes. Open <strong>Employers → My Jobs</strong>, then use <em>Edit</em> or <em>Pause</em>.</> },
+  { q: 'How do I verify a Government/GOCC account?', a: <>Sign up with an official email (e.g., <code>@gov.ph</code>) or upload an authorization letter/ID for manual review.</> },
+  { q: 'Do you have featured placements?', a: <>Yes — choose the <strong>Featured Add‑On</strong> on the Pricing page to place your job at the top and on the homepage highlight section.</> },
+  { q: 'How do I get invoices/official receipts?', a: <>After payment, a receipt is emailed automatically. You can also download invoices from <strong>Employers → Billing</strong>.</> },
+  { q: 'Who can help me if I have an issue?', a: <>Message us via the <a className="underline" href="/contact">Contact Us</a> page or email the JobNest support team. We’ll respond within 1 business day.</> },
 ];
 
-const SEEKER_FAQ: QA[] = [
-  {
-    q: 'Do I need to pay to apply?',
-    a: 'No. JobNest is free for job seekers. Create a profile and apply directly to listings.',
-  },
-  {
-    q: 'How do I know if an employer is verified?',
-    a: 'Look for the green check badge beside the employer’s name. It means they passed our verification.',
-  },
-  {
-    q: 'How do I update my profile?',
-    a: 'Go to “My Account → Edit Profile” to update your info, resume, and contact details.',
-  },
-  {
-    q: 'I applied but didn’t get a reply. What now?',
-    a: 'Employers review at their own pace. If you don’t hear back within two weeks, keep applying to other openings.',
-  },
-  {
-    q: 'Can I report suspicious posts?',
-    a: 'Yes. Click “Report Job” on the listing. Our team will review promptly and take action if needed.',
-  },
-  {
-    q: 'Is my data safe?',
-    a: 'Yes. We use Firebase Authentication and Firestore rules to keep your data secure and private.',
-  },
+const seekerFaq: QA[] = [
+  { q: 'How do I apply to a job?', a: <>Open a posting and click <strong>Apply</strong>. You can submit your resume and short message to the employer.</> },
+  { q: 'Do I need to pay to apply?', a: <>No. JobNest is free for job seekers.</> },
+  { q: 'How do I create or update my profile?', a: <>Go to <strong>Job Seekers → Profile</strong> to add your experience, skills, and resume.</> },
+  { q: 'Can I get notifications for new jobs?', a: <>Yes. Use <strong>Saved Searches</strong> or <strong>Job Alerts</strong> to get email notifications.</> },
+  { q: 'How do I report a suspicious job?', a: <>Click <em>Report</em> on the job card or contact support. We will review within 24–48 hours.</> },
+  { q: 'Where are the jobs located?', a: <>We focus on Urdaneta City and nearby areas, but some remote roles may appear depending on employers.</> },
+  { q: 'How do I withdraw an application?', a: <>Open <strong>Job Seekers → Applications</strong>, select the job, and click <em>Withdraw</em>.</> },
+  { q: 'How is my data protected?', a: <>We follow our <a href="/privacy" className="underline">Privacy Policy</a>. Only information you choose to share with employers is visible.</> },
 ];
 
-// ---- UI COMPONENTS -----------------------------------------------------------
-function ToggleTabs({
-  active,
-  onChange,
-}: {
-  active: 'employers' | 'seekers';
-  onChange: (v: 'employers' | 'seekers') => void;
-}) {
-  const base =
-    'w-full sm:w-auto px-5 py-2 rounded-xl border text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
-  const activeCls =
-    'bg-brandNavy text-white border-brandNavy focus-visible:ring-brandNavy';
-  const inactiveCls =
-    'bg-white border-slate-300 text-slate-700 hover:bg-slate-50 focus-visible:ring-slate-400';
-
+function QAItem({ qa, idx }: { qa: QA; idx: number }) {
+  const [open, setOpen] = React.useState(false);
   return (
-    <div
-      role="tablist"
-      aria-label="FAQ category"
-      className="grid grid-cols-2 gap-3 sm:inline-flex"
-    >
+    <div className="border-b border-slate-200 py-3">
       <button
-        role="tab"
-        aria-selected={active === 'employers'}
-        className={`${base} ${active === 'employers' ? activeCls : inactiveCls}`}
-        onClick={() => onChange('employers')}
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-start justify-between text-left"
+        aria-expanded={open}
       >
-        Employers
+        <span className="font-medium text-slate-800">{qa.q}</span>
+        <span className="ml-4 text-slate-400">{open ? '−' : '+'}</span>
       </button>
-      <button
-        role="tab"
-        aria-selected={active === 'seekers'}
-        className={`${base} ${active === 'seekers' ? activeCls : inactiveCls}`}
-        onClick={() => onChange('seekers')}
-      >
-        Job Seekers
-      </button>
+      {open && (
+        <div className="mt-2 text-slate-600 leading-relaxed">
+          {qa.a}
+        </div>
+      )}
     </div>
   );
 }
 
-function QAList({ items }: { items: QA[] }) {
-  return (
-    <div className="mt-6 space-y-3">
-      {items.map((item, i) => (
-        <details
-          key={i}
-          className="group rounded-xl border border-slate-200 bg-white p-4 open:shadow-sm"
-        >
-          <summary className="cursor-pointer list-none text-base font-semibold text-slate-900 marker:hidden">
-            <span className="inline-flex items-center gap-2">
-              <span className="inline-block h-2 w-2 rounded-full bg-brandNavy" />
-              {item.q}
-            </span>
-          </summary>
-          <div className="pt-3 pl-4 text-slate-700">
-            <p>{item.a}</p>
-          </div>
-        </details>
-      ))}
-    </div>
-  );
-}
-
-// ---- PAGE --------------------------------------------------------------------
 export default function FAQPage() {
-  const [tab, setTab] = useState<'employers' | 'seekers'>('employers');
+  const [tab, setTab] = React.useState<'employers' | 'seekers'>('employers');
+
+  const tabs = [
+    { key: 'employers' as const, label: 'Employers' },
+    { key: 'seekers' as const, label: 'Job Seekers' },
+  ];
+
+  const data = tab === 'employers' ? employerFaq : seekerFaq;
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10 sm:py-14">
-      <header className="mb-6">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-          Frequently Asked Questions
-        </h1>
-        <p className="mt-2 text-slate-600">
-          Quick answers for Employers and Job Seekers using JobNest Urdaneta.
-        </p>
-      </header>
+    <main className="max-w-3xl mx-auto px-4 py-10">
+      <h1 className="text-3xl font-semibold text-brandNavy text-center">FAQ</h1>
 
-      <ToggleTabs active={tab} onChange={setTab} />
-
-      <section aria-live="polite" className="mt-4">
-        {tab === 'employers' ? (
-          <>
-            <h2 className="sr-only">Employers FAQ</h2>
-            <QAList items={EMPLOYER_FAQ} />
-          </>
-        ) : (
-          <>
-            <h2 className="sr-only">Job Seekers FAQ</h2>
-            <QAList items={SEEKER_FAQ} />
-          </>
-        )}
-      </section>
-
-      {/* Helpful links */}
-      <div className="mt-10 rounded-xl border border-slate-200 bg-slate-50 p-5">
-        <p className="text-sm text-slate-700">
-          Still need help? Contact our support team at{' '}
-          <a
-            href="mailto:support@jobnest.ph"
-            className="font-medium text-brandNavy underline"
+      <div className="mt-6 flex justify-center gap-2">
+        {tabs.map(t => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={[
+              'px-4 py-2 rounded-full border',
+              tab === t.key
+                ? 'bg-brandNavy text-white border-brandNavy'
+                : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+            ].join(' ')}
           >
-            support@jobnest.ph
-          </a>{' '}
-          or visit the{' '}
-          <a href="/contact" className="font-medium text-brandNavy underline">
-            Contact Us
-          </a>{' '}
-          page.
-        </p>
+            {t.label}
+          </button>
+        ))}
       </div>
+
+      <p className="mt-4 text-center text-slate-500">
+        Quick answers to common questions. Still need help?{' '}
+        <a className="underline" href="/contact">Contact us</a>.
+      </p>
+
+      <section className="mt-8 bg-white rounded-2xl shadow-sm border border-slate-100 p-4 sm:p-6">
+        {data.map((qa, i) => (
+          <QAItem key={i} qa={qa} idx={i} />
+        ))}
+      </section>
     </main>
   );
 }
