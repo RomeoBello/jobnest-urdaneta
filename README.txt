@@ -1,0 +1,1 @@
+JobNest Dynamic Pricing + Consent. See env vars: NEXT_PUBLIC_FIREBASE_* and NEXT_PUBLIC_ADMIN_SECRET.

@@ -1,5 +1,1 @@
-import PricingPlans from '@/components/PricingPlans';
-
-export default function Page() {
-  return <PricingPlans />;
-}
+import PricingPlans from '@/components/PricingPlans'; export default function Page(){return (<main className='py-10'><div className='mx-auto max-w-6xl px-4'><h1 className='text-3xl font-bold mb-6 text-brandNavy'>Pricing</h1><PricingPlans/></div></main>);}
