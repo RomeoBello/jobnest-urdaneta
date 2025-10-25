@@ -1,11 +1,9 @@
-// app/pricing/page.tsx
 "use client";
-
-import { useEffect, useState } from "react";
-import { db } from "@/lib/firebase";
+import React, { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
 
-interface PricingData {
+type PricingDoc = {
   government_monthly: number;
   government_perClick: number;
   gocc_monthly: number;
@@ -14,87 +12,75 @@ interface PricingData {
   commercial_perClick: number;
   personal_monthly: number;
   personal_perClick: number;
-}
+};
+
+const peso = (n: number) => (n === 0 ? "Free" : `₱${n}`);
 
 export default function PricingPage() {
-  const [pricing, setPricing] = useState<PricingData | null>(null);
+  const [data, setData] = useState<PricingDoc | null>(null);
+  const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchPricing = async () => {
+    (async () => {
       try {
-        const docRef = doc(db, "pricing", "main");
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setPricing(docSnap.data() as PricingData);
+        const snap = await getDoc(doc(db, "pricing", "main"));
+        if (!snap.exists()) {
+          setErr("No pricing data found.");
         } else {
-          setError("No pricing data found in Firestore.");
+          setData(snap.data() as PricingDoc);
         }
-      } catch (err) {
-        console.error("Firestore fetch error:", err);
-        setError("Failed to load pricing data.");
+      } catch (e: any) {
+        setErr(e?.message || "Failed to load pricing data.");
       } finally {
         setLoading(false);
       }
-    };
-
-    fetchPricing();
+    })();
   }, []);
 
-  if (loading)
-    return (
-      <div className="text-center py-10 text-gray-600">
-        Loading pricing information...
-      </div>
-    );
-
-  if (error)
-    return (
-      <div className="text-center py-10 text-red-600 font-medium">
-        {error}
-      </div>
-    );
+  if (loading) return <div className="max-w-4xl mx-auto py-16 text-center">Loading pricing…</div>;
+  if (err) return <div className="max-w-4xl mx-auto py-16 text-center text-red-600">Failed to load pricing data.</div>;
+  if (!data) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-4">
-      <h1 className="text-3xl font-bold text-center mb-8 text-blue-900">
-        Pricing
-      </h1>
-
-      <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
-        <table className="min-w-full text-left border">
-          <thead className="bg-blue-900 text-white">
-            <tr>
-              <th className="py-3 px-4">Category</th>
-              <th className="py-3 px-4">Monthly Rate (₱)</th>
-              <th className="py-3 px-4">Per Click (₱)</th>
+    <main className="max-w-4xl mx-auto py-12 px-4">
+      <h1 className="text-3xl font-extrabold text-center text-slate-800 mb-8">Pricing</h1>
+      <div className="overflow-hidden rounded-xl shadow">
+        <table className="w-full border-collapse">
+          <thead>
+            <tr className="bg-indigo-900 text-white">
+              <th className="text-left p-4">Category</th>
+              <th className="text-left p-4">Monthly Rate (₱)</th>
+              <th className="text-left p-4">Per Click (₱)</th>
             </tr>
           </thead>
           <tbody>
             <tr className="border-b">
-              <td className="py-3 px-4 font-medium">Government</td>
-              <td className="py-3 px-4">{pricing?.government_monthly}</td>
-              <td className="py-3 px-4">{pricing?.government_perClick}</td>
+              <td className="p-4 font-medium">Government</td>
+              <td className="p-4">{peso(data.government_monthly)}</td>
+              <td className="p-4">{peso(data.government_perClick)}</td>
             </tr>
-            <tr className="border-b bg-gray-50">
-              <td className="py-3 px-4 font-medium">GOCC</td>
-              <td className="py-3 px-4">{pricing?.gocc_monthly}</td>
-              <td className="py-3 px-4">{pricing?.gocc_perClick}</td>
+            <tr className="border-b bg-slate-50">
+              <td className="p-4 font-medium">GOCC</td>
+              <td className="p-4">{peso(data.gocc_monthly)}</td>
+              <td className="p-4">{peso(data.gocc_perClick)}</td>
             </tr>
             <tr className="border-b">
-              <td className="py-3 px-4 font-medium">Commercial</td>
-              <td className="py-3 px-4">{pricing?.commercial_monthly}</td>
-              <td className="py-3 px-4">{pricing?.commercial_perClick}</td>
+              <td className="p-4 font-medium">Commercial</td>
+              <td className="p-4">{peso(data.commercial_monthly)}</td>
+              <td className="p-4">{peso(data.commercial_perClick)}</td>
             </tr>
             <tr>
-              <td className="py-3 px-4 font-medium">Personal</td>
-              <td className="py-3 px-4">{pricing?.personal_monthly}</td>
-              <td className="py-3 px-4">{pricing?.personal_perClick}</td>
+              <td className="p-4 font-medium">Personal</td>
+              <td className="p-4">{peso(data.personal_monthly)}</td>
+              <td className="p-4">{peso(data.personal_perClick)}</td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
+      <p className="text-sm text-slate-500 mt-4">
+        Edit values in Firestore: collection <code>pricing</code>, doc <code>main</code>. Any 0 is shown as “Free”.
+      </p>
+    </main>
   );
 }
