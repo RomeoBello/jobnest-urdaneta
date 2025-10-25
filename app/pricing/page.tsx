@@ -1,74 +1,100 @@
-'use client';
-import { useEffect, useState } from 'react';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
+// app/pricing/page.tsx
+"use client";
 
-export default function Pricing() {
-  const [pricing, setPricing] = useState<any>(null);
+import { useEffect, useState } from "react";
+import { db } from "@/lib/firebase";
+import { doc, getDoc } from "firebase/firestore";
+
+interface PricingData {
+  government_monthly: number;
+  government_perClick: number;
+  gocc_monthly: number;
+  gocc_perClick: number;
+  commercial_monthly: number;
+  commercial_perClick: number;
+  personal_monthly: number;
+  personal_perClick: number;
+}
+
+export default function PricingPage() {
+  const [pricing, setPricing] = useState<PricingData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchPricing = async () => {
       try {
-        const ref = doc(db, 'pricing', 'main');
-        const snap = await getDoc(ref);
-        if (snap.exists()) {
-          setPricing(snap.data());
+        const docRef = doc(db, "pricing", "main");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setPricing(docSnap.data() as PricingData);
+        } else {
+          setError("No pricing data found in Firestore.");
         }
-      } catch (error) {
-        console.error('Error fetching pricing:', error);
+      } catch (err) {
+        console.error("Firestore fetch error:", err);
+        setError("Failed to load pricing data.");
       } finally {
         setLoading(false);
       }
     };
+
     fetchPricing();
   }, []);
 
-  if (loading) {
+  if (loading)
     return (
-      <main className="p-10 text-center">
-        <h1 className="text-3xl font-bold text-brandNavy mb-4">Pricing</h1>
-        <p className="text-gray-600">Connecting to Firestore pricing...</p>
-      </main>
+      <div className="text-center py-10 text-gray-600">
+        Loading pricing information...
+      </div>
     );
-  }
 
-  if (!pricing) {
+  if (error)
     return (
-      <main className="p-10 text-center">
-        <h1 className="text-3xl font-bold text-brandNavy mb-4">Pricing</h1>
-        <p className="text-red-500">No pricing data found in Firestore.</p>
-      </main>
+      <div className="text-center py-10 text-red-600 font-medium">
+        {error}
+      </div>
     );
-  }
-
-  const format = (value: number) => `₱${value.toLocaleString()}`;
 
   return (
-    <main className="p-10 text-center">
-      <h1 className="text-3xl font-bold text-brandNavy mb-6">Pricing</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-        <div className="border p-4 rounded-lg shadow-sm bg-white">
-          <h2 className="text-xl font-semibold mb-2 text-brandNavy">Government</h2>
-          <p>Monthly: {format(pricing.government_monthly)}</p>
-          <p>Per Click: {format(pricing.government_perClick)}</p>
-        </div>
-        <div className="border p-4 rounded-lg shadow-sm bg-white">
-          <h2 className="text-xl font-semibold mb-2 text-brandNavy">GOCC</h2>
-          <p>Monthly: {format(pricing.gocc_monthly)}</p>
-          <p>Per Click: {format(pricing.gocc_perClick)}</p>
-        </div>
-        <div className="border p-4 rounded-lg shadow-sm bg-white">
-          <h2 className="text-xl font-semibold mb-2 text-brandNavy">Commercial</h2>
-          <p>Monthly: {format(pricing.commercial_monthly)}</p>
-          <p>Per Click: {format(pricing.commercial_perClick)}</p>
-        </div>
-        <div className="border p-4 rounded-lg shadow-sm bg-white">
-          <h2 className="text-xl font-semibold mb-2 text-brandNavy">Personal</h2>
-          <p>Monthly: {format(pricing.personal_monthly)}</p>
-          <p>Per Click: {format(pricing.personal_perClick)}</p>
-        </div>
+    <div className="min-h-screen bg-gray-50 py-10 px-4">
+      <h1 className="text-3xl font-bold text-center mb-8 text-blue-900">
+        Pricing
+      </h1>
+
+      <div className="max-w-3xl mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+        <table className="min-w-full text-left border">
+          <thead className="bg-blue-900 text-white">
+            <tr>
+              <th className="py-3 px-4">Category</th>
+              <th className="py-3 px-4">Monthly Rate (₱)</th>
+              <th className="py-3 px-4">Per Click (₱)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b">
+              <td className="py-3 px-4 font-medium">Government</td>
+              <td className="py-3 px-4">{pricing?.government_monthly}</td>
+              <td className="py-3 px-4">{pricing?.government_perClick}</td>
+            </tr>
+            <tr className="border-b bg-gray-50">
+              <td className="py-3 px-4 font-medium">GOCC</td>
+              <td className="py-3 px-4">{pricing?.gocc_monthly}</td>
+              <td className="py-3 px-4">{pricing?.gocc_perClick}</td>
+            </tr>
+            <tr className="border-b">
+              <td className="py-3 px-4 font-medium">Commercial</td>
+              <td className="py-3 px-4">{pricing?.commercial_monthly}</td>
+              <td className="py-3 px-4">{pricing?.commercial_perClick}</td>
+            </tr>
+            <tr>
+              <td className="py-3 px-4 font-medium">Personal</td>
+              <td className="py-3 px-4">{pricing?.personal_monthly}</td>
+              <td className="py-3 px-4">{pricing?.personal_perClick}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    </main>
+    </div>
   );
 }
